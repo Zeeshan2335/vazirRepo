@@ -34,24 +34,15 @@ app.post("/update", async (req, res) => {
     req.body
   );
   res.json(result);
-  //   && res.send("customer updated  successfully....!");
 });
 
 app.post("/delete", async (req, res) => {
   const result = await customersModel.findOneAndDelete(req.body);
+  console.log(result);
   res.json(result);
-  res.send("delete successfully");
+  // res.send("delete successfully");
 });
 
 app.listen(5050, () => {
   console.log("server is");
 });
-
-// app.post("/updatecards", async (req, res) => {
-//     const result = await crtCardModel.updateOne(
-//       { pdId: req.body.pdId },// front end
-//       req.body
-//     );
-//     // {name:""},{name:"syed zeeshan", age:34, city:"nanded"}
-//     res.json(result);
-//   });

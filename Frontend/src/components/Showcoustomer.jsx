@@ -4,8 +4,10 @@ import { Button, Card, CardContent, Grid } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 const Showcoustomer = () => {
   const sendData = useNavigate();
-  const userDelete = async (userId) => {
-    const result = await axios.post("http://localhost:5050/delete", userId);
+  const userDelete = async (user) => {
+    const result = await axios.post("http://localhost:5050/delete", user);
+    console.log(result.data);
+    getApi();
 
     console.log(result.data);
   };
@@ -43,10 +45,7 @@ const Showcoustomer = () => {
                 </Button>
                 {/* </Link>{" "} */}
                 <br /> <br />
-                <Button
-                  variant="contained"
-                  onClick={() => userDelete(item.custId)}
-                >
+                <Button variant="contained" onClick={() => userDelete(item)}>
                   Delete
                 </Button>
               </CardContent>
