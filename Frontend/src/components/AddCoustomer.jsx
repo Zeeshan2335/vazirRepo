@@ -4,8 +4,10 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuid4 } from "uuid";
-// import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from "react-router-dom";
+
 const AddCoustomer = () => {
+  const senData = useNavigate();
   const [user, setUser] = useState({});
 
   const userAdd = async () => {

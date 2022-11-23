@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Card, CardContent, Grid } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-
 const Showcoustomer = () => {
-  const Navigate = useNavigate();
+  const sendData = useNavigate();
+  const userDelete = async (userId) => {
+    const result = await axios.post("http://localhost:5050/delete", userId);
+
+    console.log(result.data);
+  };
   const [data, setData] = useState([]);
   const getApi = async () => {
     const result = await axios.get("http://localhost:5050");
@@ -15,10 +19,8 @@ const Showcoustomer = () => {
     getApi();
   }, []);
 
-  const handleRoute = () => {};
-
-  const handleUpdate = (item) => {
-    Navigate("/update", { state: item });
+  const userUpdated = (itemId) => {
+    sendData("/update", { state: itemId });
   };
 
   return (
@@ -33,12 +35,20 @@ const Showcoustomer = () => {
                 <h3>{item.city}</h3>
                 <h4>{item.mobile}</h4>
                 {/* <Link to={`${"/update/"}${item.custId}`}> */}
-                <Button variant="contained" onClick={() => handleUpdate(item)}>
+                <Button
+                  variant="contained"
+                  onClick={() => userUpdated(item.custId)}
+                >
                   Update
                 </Button>
                 {/* </Link>{" "} */}
                 <br /> <br />
-                <Button variant="contained">Delete</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => userDelete(item.custId)}
+                >
+                  Delete
+                </Button>
               </CardContent>
             </Card>
           </Grid>
